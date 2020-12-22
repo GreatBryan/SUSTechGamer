@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Administrator</title>
+    <script rel="text/javascript" src="http://36058s3d36.zicp.vip/SUSTechGamer-main/FrontEnd/src/script/ServerInteraction.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.css">
+    <link rel="stylesheet" href="http://36058s3d36.zicp.vip/SUSTechGamer-main/FrontEnd/src/css/administrator.css">
+
+</head>
+
+<body>
+    <div class="toggle" onclick="toggleMenu()"></div>
+    <script type="text/javascript">
+        function toggleMenu() {
+            let navigation = document.querySelector('.navigation');
+            let toggle = document.querySelector('.toggle');
+            navigation.classList.toggle('active');
+            toggle.classList.toggle('active');
+        }
+    </script>
+
+    <div id="vueDiv" v-cloak>
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a v-bind:href="'Store.html?uid='+hashedUid">
+                        <span class="icon"><i class="fa fa-home" aria-hidden="true"></i></span>
+                        <span class="title">Store</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="Community.html">
+                        <span class="icon"><i class="fa fa-cloud" aria-hidden="true"></i></span>
+                        <span class="title">Community</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div style="width:1000px;height:80px;"></div>
+
+        <div id="userSearchDiv" class="clearfix">
+            <div style="float: left;width:900px;margin-bottom: 20px;font-size: 25px;font-weight: bold;">User Management</div>
+            <div style="float: left;width:900px;margin-bottom: 10px;">
+                <input v-model="searchUid" type="text" placeholder="search user by uid" style="width:170px;height:25px;">
+                <a class="button" href="#" style="width:85px; font-weight: lighter;font-size: 17px;" v-on:click.prevent="searchByUid">Search</a>
+                <a class="button" target="_blank" href="register.html" style="width:165px; font-weight: lighter;font-size: 17px;">+ Create New User</a>
+            </div>
+            <div style="float: left;width:900px;">
+                <input v-model="searchUserName" type="text" placeholder="search user by user name" style="width:170px;height:25px;">
+                <a class="button" href="#" style="width:85px; font-weight: lighter;font-size: 17px;" v-on:click.prevent="searchByUserName">Search</a>
+                <a class="button" href="#" style="width:165px; font-weight: lighter;font-size: 17px;" v-on:click.prevent="clearUserList">Clear Searched</a>
+            </div>
+            <div v-for="(user,userIndex) in searchedUserList" class="searchedUserDiv" style="margin-bottom:0px;">
+                <div class="userAvatarDiv">
+                    <img style="position: absolute;height:120px;width:160px;" v-bind:src="'http://36058s3d36.zicp.vip/static/user/' + user.uid + '/photo.jpg'">
+                    <label style="position: absolute;top:125px;width:100px;text-align: center;"><a target="_blank" style="color:black;text-decoration:none;" v-bind:href="'userPage.html?uid='+hashedUid+'&visited='+user.hashedUid">{{user.userName}}</a></label>
+                </div>
+                <div class="userInfoDiv">
+                    <label class="userInfo" style="font-weight: bold;">User Name</label><input v-model="user.userName" class="userInfo" type=text><br>
+                    <label class="userInfo">Birthday</label><input v-model="user.birthday" class="userInfo" type="date"><br>
+                    <label class="userInfo">Gender:</label>
+                    <select v-model="user.gender" class="userInfo">
+                    <option>Man</option>
+                    <option>Woman</option>
+                    </select></br>
+                    <label class="userInfo">Role:</label>
+                    <select v-model="user.role" class="userInfo">
+                    <option>User</option>
+                    <option>Developer</option>
+                    </select>
+                </div>
+                <div class="userButtonDiv">
+                    <textarea v-model="user.profile" style="float:left;width:350px;height:100px;resize: none;margin-left: 20px;position: absolute;"></textarea>
+                    <a class="button" href="#" style="width:85px; font-weight: lighter;font-size: 17px;position: absolute;top:120px;left:20px;">Submit</a>
+                    <a class="button" href="#" style="width:125px; font-weight: lighter;font-size: 17px;position: absolute;top:120px;left:130px;">Ban Comment</a>
+                </div>
+            </div>
+            <a class="button" href="#" style="width:35px; font-weight: lighter;font-size: 17px;float: left;margin-left: 800px;margin-top: 10px;">&lt</a>
+            <a class="button" href="#" style="width:35px; font-weight: lighter;font-size: 17px;float: left;margin-left: 10px;margin-top: 10px; ">&gt</a>
+        </div>
+
+
+
+        <div id="gameSearchDiv" class="clearfix">
+            <div style="float: left;width:900px;margin-bottom: 20px;font-size: 25px;font-weight: bold;">Game Management</div>
+            <div style="float: left;width:900px;margin-bottom: 10px;">
+                <input v-model="searchGid" type="text" placeholder="search game by gid" style="width:170px;height:25px;">
+                <a class="button" href="#" style="width:85px; font-weight: lighter;font-size: 17px;" v-on:click.prevent="searchByGid">Search</a>
+                <a class="button" target="_blank" href="register.html" style="width:165px; font-weight: lighter;font-size: 17px;">Show All Games</a>
+            </div>
+            <div style="float: left;width:900px;">
+                <input v-model="searchGameName" type="text" placeholder="search game by name" style="width:170px;height:25px;">
+                <a class="button" href="#" style="width:85px; font-weight: lighter;font-size: 17px;" v-on:click.prevent="searchByGameName">Search</a>
+                <a class="button" href="#" style="width:165px; font-weight: lighter;font-size: 17px;" v-on:click.prevent="clearUserList">Clear Searched</a>
+            </div>
+            <div v-for="(game,gameIndex) in searchedGameList" class="searchedGameDiv">
+                <div class="gameInfoDiv">
+                    <label style="font-size: 17px;font-weight:bold;margin: 10px 0px;display: inline-block;width:300px;text-align: center;color: teal;">{{"Game Name: "+game.gameName}}</label></br>
+                    <label style="font-size: 20px;margin: 10px 0px;display: inline-block;width:300px;text-align: center">{{"Price: "+game.price}}</label></br>
+                    <label style="font-size: 20px;margin: 10px 0px;display: inline-block;width:300px;text-align: center">{{"Game ID: "+game.gid}}</label></br>
+                </div>
+                <textarea v-model="game.description" style="float: left;height:130px;width:400px;margin:10px 10px;resize:none;" readonly></textarea>
+                <a class="button" target="_blank" v-bind:href="'gamePage.html?uid='+hashedUid+'&gid='+game.gid" style="float:left;width:100px; font-weight: lighter;font-size: 17px;position:absolute;top:90px;">See More</a>
+                <a class="button" v-on:click.prevent="deleteGame(gameIndex)" href="#" style="float:left;width:100px; font-weight: lighter;font-size: 17px;position:absolute;top:120px;">Delete</a>
+            </div>
+
+            <a class="button" href="#" style="width:35px; font-weight: lighter;font-size: 17px;float: left;margin-left: 800px;margin-top: 10px;">&lt</a>
+            <a class="button" href="#" style="width:35px; font-weight: lighter;font-size: 17px;float: left;margin-left: 10px;margin-top: 10px; ">&gt</a>
+        </div>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: "#vueDiv",
+        data: {
+            visitor: false,
+            visitorName: "h",
+            developer: "",
+            userName: "hh",
+            uid: "",
+            hashedUid:"",
+            searchedUserList: [],
+            allGameList: [{}],
+            searchedGameList: [],
+            searchUid: "",
+            searchUserName: "",
+            searchGid: "",
+            searchGameName: "",
+        },
+        created: function() {
+            var jsonObj = parsePageUrl(location.href)
+            this.hashedUid = jsonObj.uid
+            var outThis = this
+            ajax("get","http://36058s3d36.zicp.vip:55374/userhash/findUidByHash?hash="+this.hashedUid,null,false,function(x){
+                outThis.uid=x.responseText
+            })
+            ajax("get", "http://36058s3d36.zicp.vip:55374/game/adGetGame", null, true, function(x) {
+                var jsonObj = JSON.parse(x.responseText)
+                outThis.fillGameInfo(jsonObj)
+            })
+        },
+        methods: {
+            searchByUid: function() {
+                outThis = this
+                ajax("get", "http://36058s3d36.zicp.vip:55374/administrator/getAllByUid?uid=" + this.searchUid, null, true, function(x) {
+                    console.log(x.responseText)
+                    var jsonObj = JSON.parse(x.responseText)
+                    outThis.fillUserInfo(jsonObj)
+                })
+                console.log(this.searchedUserList)
+            },
+            searchByUserName: function() {
+                outThis = this
+                ajax("get", "http://36058s3d36.zicp.vip:55374/administrator/getAllByName?name=" + this.searchUserName, null, true, function(x) {
+                    console.log(x.responseText)
+                    var jsonObj = JSON.parse(x.responseText)
+                    outThis.fillUserInfo(jsonObj)
+                })
+            },
+            fillUserInfo: function(jsonObj) {
+                for (var o in jsonObj) {
+                    var userObj = {}
+                    userObj.uid = jsonObj[o].uid
+                    ajax("get","http://36058s3d36.zicp.vip:55374/userhash/findHashByUid?uid="+userObj.uid,null,false,function(x){
+                        userObj.hashedUid=x.responseText
+                    })
+                    userObj.userName = jsonObj[o].name
+                    userObj.birthday = jsonObj[o].birth
+                    if (jsonObj[o].sex == "M" || jsonObj[o].sex == "m") {
+                        userObj.gender = "Man"
+                    } else {
+                        userObj.gender = "Woman"
+                    }
+                    if (jsonObj[o].role == 1) {
+                        userObj.role = "User"
+                    } else {
+                        userObj.role = "Developer"
+                    }
+                    userObj.profile = jsonObj[o].description
+                    this.searchedUserList.push(userObj)
+
+                }
+            },
+            clearUserList: function() {
+                this.searchedUserList = []
+            },
+            fillGameInfo: function(jsonObj) {
+                for (var o in jsonObj) {
+                    var gameObj = {}
+                    gameObj.gameName = jsonObj[o].name
+                    gameObj.price = jsonObj[o].price
+                    gameObj.gid = jsonObj[o].gid
+                    gameObj.description = jsonObj[o].g_des
+                    this.searchedGameList.push(gameObj)
+                }
+            },
+            searchByGid: function() {
+
+            },
+            deleteGame: function(index) {
+                var outThis = this
+                ajax("get", "http://36058s3d36.zicp.vip:55374/administrator/deleteByGid?gid=" + this.searchedGameList[index].gid, null, true, function(x) {
+                    if (x.responseText == 1) {
+                        alert("delete successfully")
+                        outThis.searchedGameList.splice(index, 1)
+                    } else {
+                        alert("delete failed")
+                    }
+                })
+            }
+        }
+    })
+</script>
+
+</html>

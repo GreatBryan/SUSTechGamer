@@ -1,0 +1,230 @@
+body {
+    margin: 0px 0px 0px 0px;
+    background: #ff9191;
+}
+
+a.button {
+    display: inline-block;
+    margin-left: 0px;
+    text-decoration: none;
+    text-align: center;
+    background-color: rgba(60, 155, 147, 0.87);
+    color: white;
+    font-family: 微软雅黑, 宋体, Arial, Helvetica, Verdana, sans-serif;
+    font-weight: bold;
+    -webkit-transition: all linear 0.20s;
+    -moz-transition: all linear 0.20s;
+    transition: all linear 0.20s;
+}
+
+a.button:hover {
+    background-color: rgba(86, 209, 199, 0.87);
+}
+
+div#userSearchDiv {
+    position: relative;
+    width: 900px;
+    margin: 20px 360px;
+    margin-bottom: 50px;
+    border: 1px solid grey;
+}
+
+div.searchedUserDiv {
+    float: left;
+    position: relative;
+    width: 900px;
+    height: 170px;
+    border: 1px solid grey;
+}
+
+div.userAvatarDiv {
+    /* background-color: #ea1d63; */
+    float: left;
+    position: relative;
+    height: 150px;
+    width: 200px;
+}
+
+div.userInfoDiv {
+    /* background-color: aqua; */
+    float: left;
+    height: 150px;
+    width: 300px;
+}
+
+label.userInfo {
+    display: inline-block;
+    width: 130px;
+    text-align: left;
+    margin-top: 10px;
+    margin-left: 10px;
+    color: rgb(70, 115, 121);
+}
+
+input.userInfo {
+    width: 130px;
+    margin-top: 10px;
+    color: rgb(70, 115, 121);
+    margin-left: 10px;
+}
+
+select.userInfo {
+    width: 130px;
+    margin-top: 10px;
+    color: rgb(70, 115, 121);
+    margin-left: 5px;
+}
+
+div.userButtonDiv {
+    /* background-color: blueviolet; */
+    position: relative;
+    float: left;
+    width: 397px;
+    height: 150px;
+}
+
+div#gameSearchDiv {
+    position: relative;
+    width: 900px;
+    margin: 20px 360px;
+    border: 1px solid grey;
+}
+
+div.searchedGameDiv {
+    float: left;
+    position: relative;
+    width: 900px;
+    height: 150px;
+    border: 1px solid grey;
+}
+
+div.gameInfoDiv {
+    /* background-color: firebrick; */
+    float: left;
+    width: 300px;
+    height: 150px;
+    color: rgb(70, 115, 121);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.navigation {
+    position: fixed;
+    width: 50px;
+    height: 100%;
+    background: rgba(128, 0, 85, 0.555);
+    transition: 0.5s;
+    overflow: hidden;
+}
+
+.navigation:hover,
+.navigation.active {
+    width: 160px;
+}
+
+.navigation ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.navigation ul li {
+    position: relative;
+    width: 100%;
+    list-style: none;
+}
+
+.navigation ul li:hover {
+    background: #ea1d63;
+}
+
+.navigation ul li a {
+    position: relative;
+    display: none;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: #fff;
+}
+
+.navigation ul li a .icon {
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+
+.navigation ul li a .icon .fa {
+    font-size: 24px;
+}
+
+.navigation ul li a .title {
+    position: relative;
+    display: block;
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    text-align: start;
+    margin-left: -20px;
+    white-space: nowrap;
+}
+
+.toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    background: purple;
+    cursor: pointer;
+}
+
+.toggle.active {
+    background: #ea1d63;
+}
+
+.toggle:before {
+    content: '\f0c9';
+    font-family: fontAwesome;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    line-height: 60px;
+    text-align: center;
+    font-size: 24px;
+    color: #fff;
+}
+
+.toggle.active:before {
+    content: '\f00d';
+}
+
+[v-cloak] {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .navigation {
+        left: -60px;
+    }
+    .navigation.active {
+        left: 0px;
+        width: 100%;
+    }
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}

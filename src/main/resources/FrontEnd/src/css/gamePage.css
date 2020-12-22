@@ -1,0 +1,223 @@
+body {
+    margin: 0px 0px 0px 0px;
+    background: #ff9191;
+}
+
+#headerDiv {
+    background-color: #fd882f;
+    opacity: 0.8;
+    color: white;
+    position: fixed;
+    width: 100%;
+    height: 100px;
+    margin-bottom: 30px;
+    margin-top: 0px;
+    top: 0px;
+    z-index: 4;
+}
+
+a.link {
+    color: white;
+    text-decoration: none;
+    font-family: 微软雅黑, 宋体, Arial, Helvetica, Verdana, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+a.link:hover {
+    background-color: #ff7000;
+}
+
+#gameDetailDiv {
+    background: #a1f5a1;
+    width: 1100px;
+    height: 750px;
+    margin: 0 auto;
+    margin-top: 30px;
+    position: relative;
+}
+
+#gameVideoDiv {
+    float: left;
+    width: 850px;
+    height: 480px;
+}
+
+#gameGetDiv {
+    float: left;
+    width: 250px;
+    height: 480px;
+}
+
+#priceDiv {
+    /* background-color: blue; */
+    width: 200px;
+    height: 100px;
+    color: rgb(70, 115, 121);
+    /* line-height: 100px; */
+    margin: 70px auto;
+    font-family: 微软雅黑, 宋体, Arial, Helvetica, Verdana, sans-serif;
+    font-weight: bold;
+    /* font-size: 70px; */
+    text-align: center;
+}
+
+
+/* a {
+    color: white;
+} */
+
+a.button {
+    display: block;
+    margin-left: 0px;
+    text-decoration: none;
+    text-align: center;
+    background-color: rgba(60, 155, 147, 0.87);
+    color: white;
+    /* border: black solid 2px; */
+    -webkit-transition: all linear 0.20s;
+    -moz-transition: all linear 0.20s;
+    transition: all linear 0.20s;
+}
+
+a.button:hover {
+    background-color: rgba(86, 209, 199, 0.87);
+}
+
+#gameDescription {
+    float: left;
+    /* background-color: blue; */
+    width: 1100px;
+    height: 60px;
+}
+
+#gamePictureDiv {
+    /* background-color: red; */
+    background: #a1f5a1;
+    width: 1100px;
+    margin: 0 auto;
+    position: relative;
+}
+
+#gameCommentDiv {
+    background: #a1f5a1;
+    /* background-color: fuchsia; */
+    width: 1100px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.clasify {
+    width: 1100px;
+    height: 50px;
+    float: left;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: rgb(21, 68, 68);
+    color: white;
+    font-family: 微软雅黑, 宋体, Arial, Helvetica, Verdana, sans-serif;
+    font-weight: lighter;
+    font-size: 30px;
+    line-height: 50px;
+    text-align: center
+}
+
+.inlineDiv {
+    float: left;
+    background-color: rgba(255, 255, 255, 0.9);
+    /* color: rgba(20, 20, 80, 1); */
+    width: 350px;
+    height: 250px;
+    /* left: 30px;
+    right: 30px; */
+    margin-left: 25px;
+    margin-bottom: 20px;
+    /* border: 1px solid; */
+    /* border-radius: 5px; */
+    font-family: 微软雅黑, 宋体, Arial, Helvetica, Verdana, sans-serif;
+    font-weight: lighter;
+}
+
+#scoreDiv {
+    background: #a1f5a1;
+    width: 100%;
+    height: 150px;
+    float: left;
+    border: black solid 1px;
+}
+
+.userCommentDiv {
+    background: #a1f5a1;
+    width: 100%;
+    height: 150px;
+    float: left;
+    border: black solid 1px;
+}
+
+div.branchDiv {
+    float: left;
+    /* background-color: darksalmon; */
+    width: 1100px;
+    height: 100px;
+    font-size: 25px;
+    margin: 10px 30px;
+}
+
+textarea.branchInfo {
+    margin-top: 10px;
+    margin-left: 20px;
+    width: 900px;
+    height: 80px;
+    background: #cc8c8c;
+    float: left;
+    resize: none;
+    border: 1px solid white;
+}
+
+[v-cloak] {
+    display: none;
+}
+
+.starRating {
+    width: 300px;
+    height: 70px;
+    margin: 0 0;
+    text-align: center;
+}
+
+.starRating ul {
+    overflow: hidden;
+    padding: 0px;
+}
+
+.starRating ul li {
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin-left: 0px;
+    list-style: none;
+    background: url(../../figures/temporary/gamePageImg/star.png) no-repeat 50% 50%;
+    background-size: cover;
+}
+
+.starRating ul li.light {
+    background: url(../../figures/temporary/gamePageImg/star_actived.png) no-repeat 50% 0;
+    background-size: contain;
+}
+
+.starRating ul li a {
+    display: block;
+    width: 100%;
+    padding-top: 0px;
+    margin-top: 8px;
+    overflow: hidden;
+    opacity: 0;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}

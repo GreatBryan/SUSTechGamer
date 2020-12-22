@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SUStech Gamer</title>
+    <script src="../script/ServerInteraction.js"></script>
+    <link rel="stylesheet" href="http://36058s3d36.zicp.vip/SUSTechGamer-main/FrontEnd/src/css/Search.css"/>
+</head>
+
+<body>
+<div id="top_bar">
+    <ul id="top_bar_item">
+        <a class="top_bar_btn" href="Store.html">Store</a>
+        <a class="top_bar_btn" href="userPage.html">Library</a>
+        <a class="top_bar_btn" href="Community.html">Community</a>
+        <a class="top_bar_btn" href="About.html">About</a>
+
+        <label><input type="text" id="search_content"></label>
+        <img src="../../figures/icon/search_white_16.png" onclick=search()>
+        <a id="login_btn" href="login.html">Login</a>
+    </ul>
+</div>
+    <div id="game_list">
+
+    </div>
+    <script>
+        window.onload = function(){
+            run_search();
+            try{
+                let q = parsePageUrl(window.location.href);
+                if (q.hasOwnProperty("uid"))
+                    UID = q.uid;
+            }catch (Exception){
+                console.log(Exception)
+            }
+            if (UID !== null){
+                let buttons = document.getElementsByClassName("top_bar_btn");
+                for (let i = 0; i < buttons.length; i ++){
+                    buttons[i].href = buttons[i].href + "?uid=" + UID.toString();
+                }
+                add_user_info();
+            }
+        }
+        function add_user_info(){
+            let login_btn = document.getElementById("login_btn");
+            login_btn.remove();
+            let user_info = document.createElement("div");
+            user_info.id = "user_info";
+            let user_avatar = document.createElement("img");
+            user_avatar.id = "user_avatar";
+            let user_name = document.createElement("b");
+            user_name.id = "user_name";
+            user_avatar.src = "http://36058s3d36.zicp.vip/static/user/"+UID.toString()+"/photo.jpg";
+            ajax("get", "http://10.21.100.129:9090/user/findNameByUid?uid="+UID.toString(), null, true, function(ua){
+                user_name.innerHTML = ua.responseText;
+            });
+            user_info.appendChild(user_name);
+            user_info.appendChild(user_avatar);
+            user_info.addEventListener("click", function(){
+                window.location.href = "userPage.html?uid="+UID.toString();
+            });
+            let tb = document.getElementById("top_bar");
+            tb.appendChild(user_info);
+        }
+        function run_search(){
+            let query_json = parsePageUrl(window.location.href);
+            let query = query_json.query;
+            ajax("get", "http://10.21.100.129:9090/game/findByName?name="+query.toString(), null, true, function(x){
+                let result = JSON.parse(x.responseText);
+                console.log(result);
+                arrange_game_list(result);
+            });
+        }
+        let GAME_LIST_COUNT = 0
+        function arrange_game_list(GAME_LIST){
+            let list = GAME_LIST;
+            let game_list = [];
+            let game_pics = [];
+            let game_descriptions = [];
+            let gid = [];
+            for (let i = GAME_LIST_COUNT; i < GAME_LIST_COUNT+5 && i < list.length; i++){
+                game_list.push(list[i]["name"]);
+                game_pics.push("http://36058s3d36.zicp.vip/static/game/"+list[i]["gid"].toString()+"game/picture/game.jpg");
+                game_descriptions.push(list[i]["g_des"]);
+                gid.push(list[i]["gid"]);
+            }
+
+            let game_list_div = document.getElementById("game_list");
+            for(let i = 0; i < game_list.length; i ++){
+                let div = document.createElement("div");
+                div.className = "game_list_div";
+                game_list_div.appendChild(div);
+            }
+            for(let i = 0; i < game_list.length; i ++){
+                let name = document.createElement("span");
+                name.innerHTML = "<b>"+game_list[i]+"</b>";
+                game_list_div.children[i + GAME_LIST_COUNT].appendChild(name);
+
+                let pic = document.createElement("img");
+                pic.src = game_pics[i];
+                game_list_div.children[i + GAME_LIST_COUNT].appendChild(pic);
+
+                let description = document.createElement("p");
+                description.innerHTML = game_descriptions[i];
+                game_list_div.children[i + GAME_LIST_COUNT].appendChild(description);
+
+                game_list_div.children[i + GAME_LIST_COUNT].addEventListener("click", function(){
+                    if (parsePageUrl(window.location.href).uid === null) {
+                        window.location.href = "./gamePage.html?gid=" + gid[i].toString();
+                    }else {
+                        window.location.href = "./gamePage.html?uid="+parsePageUrl(window.location.href).uid+"&gid=" + gid[i].toString();
+                    }
+                });
+            }
+            GAME_LIST_COUNT += game_list.length;
+        }
+    </script>
+</body>
+</html>

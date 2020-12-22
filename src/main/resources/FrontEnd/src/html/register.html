@@ -1,0 +1,166 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register</title>
+
+    <link rel="stylesheet" type="text/css" href="http://36058s3d36.zicp.vip/SUSTechGamer-main/FrontEnd/src/css/register.css" />
+    <script type="text/javascript" src="http://36058s3d36.zicp.vip/SUSTechGamer-main/FrontEnd/src/script/ServerInteraction.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="font-awesome.css"/> -->
+    <div id="gamer">
+        <div style="height:20px;"></div>
+        <h1 align="center"> Sustech Gamer</h1>
+    </div>
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.1/css/all.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="login_box" style="padding: 20px;margin-top: 40px;">
+
+        <!-- <h1> LOGIN</h1> -->
+        <div id="switch">
+            <a href="login.html">Login/</a>
+            <a href="register.html">Register</a>
+            <!-- <a class="linkABlue" id="toAccountLogin" href="login.html">账号登录/</a>  -->
+            <!-- <span class="register-line"></span>  -->
+            <!-- <a class="linkAGray" id="toVCodeLogin" href="register.html">账号注册</a>  -->
+        </div>
+        <br>
+        <div id="form">
+            <div class="search-box-wrap" style="height:40px;">
+                <div class="search-box" style="height:40px;">
+                    <input placeholder="E-Mail" name="email" v-model="emailAddress" type="text" class="search-input" style="height:40px;">
+                    <a href="#" class="search-btn">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            <br>
+
+            <div class="search-box-wrap" style="height:40px;">
+                <div class="search-box" style="height:40px;">
+                    <input placeholder="Name" name="uname" v-model="userName" type="text" class="search-input" style="height:40px;">
+                    <a href="#" class="search-btn">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- </template> -->
+            <br>
+            <div class="search-box-wrap" style="height:40px;margin-bottom: 20px;">
+                <div class="search-box" style="height:40px;">
+                    <input placeholder="PassWord" name="password" v-model="password" type="password" class="search-input" style="height:40px;">
+                    <a href="#" class="search-btn">
+                        <i class="fa fa-key" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+
+
+
+            <br>
+
+
+
+        </div>
+        <!-- 
+        <div class="btn" id="a" input type="button" onclick="login_ajax()">Get VerifyCode
+            <!-- <button id="a" input type="button" ">Sign in</button> -->
+        <!-- </div>  -->
+
+        <div id="formDiv" style="text-align: unset;position: relative;">
+            <label style="font-size: 25px;font-weight:bold;margin-left: 170px;display: inline-block;width:100px;float: left;text-align: left;">Gender: </label>
+            <input type="radio" name="sex" value="M" v-model="gender" style="font-size: 20px;float:left;height:35px;">
+            <p style="font-size: 20px;float:left;height:35px;margin: 0px;line-height: 35px;">Man</p>
+            <input type="radio" value="W" name="sex" v-model="gender" style="font-size: 20px;float:left;height:35px;">
+            <p style="font-size: 20px;float:left;height:35px;margin: 0px;line-height: 35px;">Woman</p>
+            <label style="font-size: 25px;font-weight:bold;margin-left: 170px;display: inline-block;width:100px;float: left;text-align: left;">Role: </label>
+            <input type="radio" value="2" name="role" v-model="role" style="font-size: 20px;float:left;height:35px;">
+            <p style="font-size: 20px;float:left;height:35px;margin: 0px;line-height: 35px;">User</p>
+            <input type="radio" name="role" value="1" v-model="role" style="font-size: 20px;float:left;height:35px;">
+            <p style="font-size: 20px;float:left;height:35px;margin: 0px;line-height: 35px;">Developer</p>
+
+
+            <div v-on:click="getComfirm" class="btn" id="a" input type="button" style="float:left;width:250px;position: absolute;top:30px;left:175px;height:30px;">Get Verify Number</div>
+            <label style="float: left;position: absolute;top:90px;left:440px;">{{counter+counterReminder}}</label>
+
+            <input type="text" v-model="userNum" style="float: left;position: absolute;top:120px;left:175px;width:250px;border-radius: 10px;height:30px;" placeholder="enter verify number">
+            <!-- <button v-on:click="numberVerify">verify</button> -->
+
+            <div v-on:click="numberVerify" class="btn2" id="b" input type="button" style="float:left;width:250px;position: absolute;top:160px;left:175px;height:30px;">Sign Up</div>
+
+        </div>
+    </div>
+
+
+
+</body>
+<script>
+    var vm = new Vue({
+        el: "#login_box",
+        data: {
+            emailAddress: "",
+            userName: "",
+            password: "",
+            role: "",
+            gender: "",
+            verifyNum: "12",
+            counterReminder: "ready to send",
+            userNum: "",
+            counter: "",
+            timer: null,
+
+
+        },
+        methods: {
+            getComfirm: function() {
+                if (this.counter == "") {
+                    outthis = this
+                    ajax("get", "http://36058s3d36.zicp.vip:55374/user/email?email=" + this.emailAddress, null, true, function(xmlHttp) {
+                        outthis.verifyNum = xmlHttp.responseText
+
+                    })
+                    this.counter = 60
+                    this.counterReminder = "s before re-send"
+                    this.timer = setInterval(this.countDown, 1000)
+                }
+            },
+
+            numberVerify: function() {
+                if (this.userNum == this.verifyNum) {
+                    var userInfo = "email=" + this.emailAddress + "&uname=" + this.userName + "&password=" + this.password + "&role=" + this.role + "&sex=" + this.gender
+                    console.log(userInfo)
+                    var formData = new FormData(document.getElementById("userInfoForm"))
+                    console.log(formData.get("role"))
+                    console.log(formData.get("sex"))
+                    console.log(formData.get("name"))
+                    console.log(formData.get("email"))
+                    ajax("get", "http://36058s3d36.zicp.vip:55374/user/signup?" + userInfo, null, true, function(xmlHttp) {})
+                    alert("success")
+                    window.location.href = "login.html?userName=" + this.userName
+                } else {
+                    alert("wrong verifyNum")
+                }
+                //this.ajax("get", "", null)
+
+                // window.location.href = "Store.html?userName=" + this.userName
+            },
+            countDown: function() {
+                if (this.counter > 1) {
+                    this.counter--
+                } else {
+                    clearInterval(this.timer)
+                    this.counter = ""
+                    this.counterReminder = "ready to send"
+                }
+            }
+
+        }
+    })
+</script>
+
+</html>

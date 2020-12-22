@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SUStech Community</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://36058s3d36.zicp.vip/SUSTechGamer-main/FrontEnd/src/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://36058s3d36.zicp.vip/SUSTechGamer-main/FrontEnd/src/css/Community.css" />
+    <script src="http://36058s3d36.zicp.vip/SUSTechGamer-main/FrontEnd/src/script/jquery-3.4.1.min.js"></script>
+    <script src="http://36058s3d36.zicp.vip/SUSTechGamer-main/FrontEnd/src/script/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="http://36058s3d36.zicp.vip/SUSTechGamer-main/FrontEnd/src/script/ServerInteraction.js"></script>
+</head>
+
+<body style="padding-top: 50px">
+    <div class="navbar navbar-fixed-top navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+                <a class="navbar-brand" href="#"><span class=" icon-cloud"></span> Sustech Community</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="Store.html"><span class="icon-comments"> Store</span></a></li>
+                    <li><a href="#"><span class="icon-envelope"> Message<span class="badge pull-right">3</span></span></a>
+                    </li>
+                    <li><a href="#"><span class="icon-suitcase"> Topics</span></a></li>
+                    <li><a href="#"><span class="icon-camera"> Findings</span></a></li>
+                </ul>
+                <form class="pull-right navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input id="top-nav-search" type="text" class="form-control" placeholder="Findings...">
+                    </div>
+                    <button type="submit" class="btn">Search</button>
+                </form>
+            </div>
+            <!-- /.nav-collapse -->
+        </div>
+        <!-- /.container -->
+    </div>
+    <!--主页面开始-->
+    <div id="divMain" class="container">
+        <div id="hideDiv" style="position: fixed;width:100%;height:2000px;top:0;left:0;background-color:#000;opacity: 0.6;z-index: 6; display: none;"></div>
+        <div class="row">
+            <div class="col-md-3 col-sm-4">
+                <div id="left-window">
+                    <div id="user_info">
+                        <div id="user_head_top_img" style="background-image: url(../../figures/temporary/game_recommend/LegendOfZelda.jpg)"></div>
+                        <div style="text-align: center">
+                            <img class="user_head img-circle" src="../../figures/temporary/community_recommend/头像.jpg" alt="user head img">
+                        </div>
+                        <div style="padding-left: 15px;padding-right: 15px;text-align: center" class="caption">
+                            <h3 id="user-name">The shy</h3>
+                            <p>I am a boy</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="user-photo-play" class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">My pictures</h3>
+                    </div>
+                    <div class="panel-body" style="padding:0;">
+                        <div id="myCarousel" class="carousel slide">
+                            <!-- 轮播（Carousel）指标 -->
+                            <ol class="carousel-indicators">
+                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                <li data-target="#myCarousel" data-slide-to="1"></li>
+                                <li data-target="#myCarousel" data-slide-to="2"></li>
+                            </ol>
+                            <!-- 轮播（Carousel）项目 -->
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <img src="../../figures/temporary/community_recommend/1.jpg" alt="First slide" />
+                                </div>
+                                <div class="item">
+                                    <img src="../../figures/temporary/community_recommend/2.jpg" alt="Second slide" />
+                                </div>
+                                <div class="item">
+                                    <img src="../../figures/temporary/community_recommend/3.jpg" alt="Third slide" />
+                                </div>
+                            </div>
+                            <!-- 轮播（Carousel）导航 -->
+                            <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                            <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- 左窗口-->
+            <div class="col-md-6 col-sm-8" id="centerBox">
+                <div id="center-window">
+                    <div id="textBox_new">
+                        <textarea id="txtNew" prefix class="form-control textBox-input" placeholder="Say...."></textarea>
+                        <div id="button-textBox">
+                            <div class="btn-group btn-group-sm">
+
+                                <label type="button" class="btn" title="only .jpg and .mp4">
+                                    Pictures
+                                    <input type="file" name="upload_pics" id="upload_pics"  title="only .jpg and .mp4">
+                            </label>
+
+                                <button type="button" class="btn "><span class="icon-comment"></span> Topics</button>
+                            </div>
+                            <a id="submitNew" href="#" class="btn btn-success pull-right" role="button" onclick="publish()">Publish</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="active-main">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <a href="javascript:void(0)"><img class="img-responsive img-circle" src="../../figures/temporary/community_recommend/头像.jpg"
+                                                          alt="user head img"></a>
+                    </div>
+                    <div class="col-xs-10">
+                        <div class="">
+                            <div class="">
+                                <small class="pull-right">4 分钟</small>
+                                <h4><a href="javascript:void(0)">The shy</a></h4>
+                            </div>
+                            <p class="user-text">
+                                我裂开
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="user_comment row">
+                    <div class="col-xs-2"></div>
+                    <div class="col-xs-10">
+                        <div class="row user_comment_list">
+                            <div class="col-xs-2 user_comment_headImg">
+                                <a href="javascript:void(0)"><img class="img-responsive img-circle"
+                                                                  src="../../figures/temporary/community_recommend/浩哥.png"
+                                                                  alt="user head img"></a>
+                            </div>
+                            <div class="col-xs-10">
+                                <div class="">
+                                    <div class="">
+                                        <small class="pull-right"> 刚刚</small>
+                                        <h5><a href="javascript:void(0)">浩憋</a></h5>
+                                    </div>
+                                    <p class="user_comment_text">
+                                        要好好加油哦!
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+
+                <!-- <div class="active-main">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <a href="javascript:void(0)"><img class="img-responsive img-circle" src="image/qdwxj.jpg"
+                                                          alt="user head img"></a>
+                    </div>
+                    <div class="col-xs-10">
+                        <div class="">
+                            <div class="">
+                                <small class="pull-right">12 分钟</small>
+                                <h4><a href="javascript:void(0)">晴大文学家</a></h4>
+                            </div>
+                            <p class="user-text">
+                                哇！连续两天开传说！人品爆表！！！
+                            </p>
+                            <div class="user_text_img">
+                                <img class="img-responsive" src="image/bq1.jpg"/>
+                                <img class="img-responsive" src="image/bq2.jpg"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="active-main">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <a href="javascript:void(0)"><img class="img-responsive img-circle" src="image/gouzei.jpg"
+                                                          alt="user head img"></a>
+                    </div>
+                    <div class="col-xs-10">
+                        <div class="">
+                            <div class="">
+                                <small class="pull-right">33 分钟</small>
+                                <h4><a href="javascript:void(0)">炉石萌萌哒的狗贼丶</a></h4>
+                            </div>
+                            <p class="user-text">
+                                我打炉石真菜!远远没有恰西同学一半厉害,唉,好气啊!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="user_comment row">
+                    <div class="col-xs-2"></div>
+                    <div class="col-xs-10">
+                        <div class="row">
+                            <div class="col-xs-2 user_comment_headImg">
+                                <a href="javascript:void(0)"><img class="img-responsive img-circle"
+                                                                  src="image/qx.jpg"
+                                                                  alt="user head img"></a>
+                            </div>
+                            <div class="col-xs-10">
+                                <div class="">
+                                    <div class="">
+                                        <small class="pull-right">2 分钟</small>
+                                        <h5><a href="javascript:void(0)">恰西</a></h5>
+                                    </div>
+                                    <p class="user_comment_text">
+                                        自己知道就好,干嘛说出来...
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row user_comment_list">
+                            <div class="col-xs-2 user_comment_headImg">
+                                <a href="javascript:void(0)"><img class="img-responsive img-circle"
+                                                                  src="image/qdwxj.jpg"
+                                                                  alt="user head img"></a>
+                            </div>
+                            <div class="col-xs-10">
+                                <div class="">
+                                    <div class="">
+                                        <small class="pull-right"> 1 分钟</small>
+                                        <h5><a href="javascript:void(0)">晴大文学家</a></h5>
+                                    </div>
+                                    <p class="user_comment_text">
+                                        哈哈哈,菜鸡狗贼~!
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="active-main">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <a href="javascript:void(0)"><img class="img-responsive img-circle" src="image/djjaw.jpg"
+                                                          alt="user head img"></a>
+                    </div>
+                    <div class="col-xs-10">
+                        <div class="">
+                            <div class="">
+                                <small class="pull-right">41 分钟</small>
+                                <h4><a href="javascript:void(0)">大井井啊喂</a></h4>
+                            </div>
+                            <p class="user-text">
+                                考研后的日纸果然美滋滋 网瘾少女时隔三个月终于如愿以偿的去了网咖 但昨天曾经十三连庄的麻将小公举一归三输了俩百,虽然faceu软件确实把人p的失真了 但说我发别人照片
+                                小姐姐就很不理解了
+                            </p>
+                            <div class="user_text_img">
+                                <img class="img-responsive" src="image/bq3.jpg"/>
+                                <img class="img-responsive" src="image/bq4.jpg"/>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            <div class="active-main">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <a href="javascript:void(0)"><img class="img-responsive img-circle" src="image/cyh.jpg"
+                                                          alt="user head img"></a>
+                    </div>
+                    <div class="col-xs-10">
+                        <div class="">
+                            <div class="">
+                                <small class="pull-right">55 分钟</small>
+                                <h4><a href="javascript:void(0)">校草小同学</a></h4>
+                            </div>
+                            <p class="user-text">
+                                只有在夜深人静，或者独处的时候，才会静下心来反思自己。21年还没等我反应过来就要过完了，想了想，今年好像就一直浑浑噩噩的结束了。回首，我仿佛丢失了什么。我曾经最喜欢的，最欣喜若狂的它，被我遗弃在角落箱子里，在布满灰尘的笔筒里。我心里很清楚，从第一次把绘画当作交易品之后，就再也没有真正的“画”。我一直对选择都是极端的，沉入谷底，竭尽全力。我没有一次跳出这种奇怪的选择，因为“中间状态”总有一天会让我感到厌腻，晚睡，拖延，将就，犹豫，对在意自己的人乱发脾气，对沿路的风景不再有感知。但是我知道的当我闭上双眼明天又是全新的自己。——
+                                记一次自我反省2016.12.14
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="user_comment row">
+                    <div class="col-xs-2"></div>
+                    <div class="col-xs-10">
+                        <div class="row user_comment_list">
+                            <div class="col-xs-2 user_comment_headImg">
+                                <a href="javascript:void(0)"><img class="img-responsive img-circle"
+                                                                  src="image/qx.jpg"
+                                                                  alt="user head img"></a>
+                            </div>
+                            <div class="col-xs-10">
+                                <div class="">
+                                    <div class="">
+                                        <small class="pull-right">9 分钟</small>
+                                        <h5><a href="javascript:void(0)">恰西</a></h5>
+                                    </div>
+                                    <p class="user_comment_text">
+                                        慢慢来,新年新气象~
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+                <!-- <div class="active-main">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <a href="javascript:void(0)"><img class="img-responsive img-circle" src="../../figures/mypic/me.jpg"
+                                                          alt="user head img"></a>
+                    </div>
+                    <div class="col-xs-10">
+                        <div class="">
+                            <div class="">
+                                <small class="pull-right">1 小时</small>
+                                <h4><a href="javascript:void(0)">肉鸡</a></h4>
+                            </div>
+                            <p class="user-text">
+                                厉害啊 <a class="user_text_url"
+                                                                                  href="https://www.zhihu.com/"
+                                                                                  target="_blank"><span
+                                    class=" icon-paper-clip"></span>网页链接</a>
+                            </p>
+                            <div class="user_text_img">
+                                <img class="img-responsive" src="../../figures/temporary/game_recommend/AnimalCrossing.jpg"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="user_comment row">
+                    <div class="col-xs-2"></div>
+                    <div class="col-xs-10">
+                        <div class="row user_comment_list">
+                            <div class="col-xs-2 user_comment_headImg">
+                                <a href="javascript:void(0)"><img class="img-responsive img-circle"
+                                                                  src="../../figures/mypic/she.jpg"
+                                                                  alt="user head img"></a>
+                            </div>
+                            <div class="col-xs-10">
+                                <div class="">
+                                    <div class="">
+                                        <small class="pull-right">41 分钟</small>
+                                        <h5><a href="javascript:void(0)">美女</a></h5>
+                                    </div>
+                                    <p class="user_comment_text">
+                                        666
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="userComment" v-for="(comment,index) in commentList">
+                    <div class="userAvatar">
+                        <img style="position: absolute;width:130px;height:120px;top:10px;left:10px;" v-bind:src="comment.userAvatar">
+                        <label style="position: absolute;top:130px;font-size: 15px;display: inline-block;width:130px;text-align: center"><a target="_blank" v-bind:href="'userPage.html?uid='+uid+'&visited='+comment.uid" >{{comment.userName}}</a><span v-if="comment.reid!=0"> @</span>
+                            <a target="_blank" v-bind:href="'userPage.html?uid='+uid+'&visited='+comment.reid" >{{comment.reName}}</a>    
+                        </label>
+                    </div>
+                    <textarea style="float: left;width:300px;height:120px;margin-top:15px;margin-left:15px;resize:none;" readonly>{{comment.content}}</textarea>
+                    <div style="float: left;width:150px;height:150px;position: relative;">
+                        <img v-bind:src="comment.picPath" v-if="comment.isVideo==0&comment.path!=''" style="position: absolute;width:120px;height:120px;top:15px;left:15px;">
+                        <video v-if="comment.isVideo!=0" style="position: absolute;width:120px;height:120px;top:15px;left:15px;" controls autoplay>
+                                <source v-bind:src="comment.picPath"  type="video/mp4">   
+                                您的浏览器不支持 video 属性。
+                              </video>
+                    </div>
+                    <div v-on:click="likeComment(index)" style="float: left;width:100px;height:30px;background:chartreuse;margin-top: 20px;margin-left: 20px;">
+                        <img src="../../figures/icon/liked.png" style="width:30px;height:30px;">
+                        <span style="display: inline-block;margin-left:10px;font-size: 20px;">{{comment.goodNum}}</span>
+                    </div>
+                    <div v-on:click="dislikeComment(index)" style="float: left;width:100px;height:30px;background:rgb(197, 68, 68); margin-top: 10px;margin-left: 20px;">
+                        <img src="../../figures/icon/dislike.png" style="width:30px;height:25px;">
+                        <span style="display: inline-block;margin-left:10px;font-size: 20px;">{{comment.badNum}}</span>
+                    </div>
+                    <a v-on:click.prevent="getRepliedUid(index,'replyDiv')" style="display: block;float:left;width:100px;height:30px;background:cyan;color:white;margin-top: 10px;margin-left: 20px;text-align: center;line-height: 30px;font-size: 20px;font-weight: bold;text-decoration: none;">Reply</a>
+
+                </div>
+                <div id="replyDiv" class="userInfo" style="height:300px;width:400px;position:fixed;top:200px;left:550px;background-color:aqua;z-index: 7;display: none;border:1px solid white;">
+                    <textarea v-model="replyContent" style="width:300px;height:150px;margin-top: 30px;margin-left: 50px;resize: none;"></textarea>
+                    <input type="file" v-on:change="uploadCommentFile($event)" style="margin-left: 50px;">
+                    <a class="button" href="#" style="width:85px;margin:30px 60px; font-weight: lighter;font-size: 17px;" v-on:click.prevent="submitNewComment('replyDiv')">Submit</a>
+                    <a class="button" href="#" style="width:85px;margin:30px 0px; font-weight: lighter;font-size: 17px;" v-on:click.prevent="cancel('replyDiv')">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 主窗口-->
+
+
+    <div style="height: 700px"></div>
+    <!-- 主窗口结束 -->
+
+</body>
+<script>
+    var vm = new Vue({
+        el: "#divMain",
+        data: {
+            replyContent: "",
+            replyFile: null,
+            repliedUid: "",
+            uid: "",
+            tid: "",
+            commentList: [],
+        },
+        created: function() {
+            var outThis = this
+            var jsonObj = parsePageUrl(location.href)
+            this.uid = jsonObj.uid
+            this.tid = jsonObj.tid
+            console.log(this.tid)
+            ajax("get", "http://36058s3d36.zicp.vip:55374/comment/getAllByTid?tid=" + this.tid, null, true, function(x) {
+                console.log(x.responseText)
+                var jsonObj = JSON.parse(x.responseText)
+                for (var o in jsonObj) {
+                    var commentObj = {}
+                    commentObj.uid = jsonObj[o].uid
+                    commentObj.userName = jsonObj[o].name
+                    commentObj.reid = jsonObj[o].reid
+                    commentObj.reName = jsonObj[o].re_name
+                    commentObj.content = jsonObj[o].content
+                    commentObj.isVideo = jsonObj[o].isvideo
+                    commentObj.picPath = jsonObj[o].path
+                    commentObj.goodNum = jsonObj[o].good
+                    commentObj.badNum = jsonObj[o].bad
+                    commentObj.cid = jsonObj[o].cid
+                    commentObj.userAvatar = "http://36058s3d36.zicp.vip/static/user/" + commentObj.uid + "/photo.jpg"
+                    outThis.commentList.push(commentObj)
+                }
+                console.log(outThis.commentList)
+            })
+        },
+        methods: {
+            likeComment: function(index) {
+                var outThis = this
+                ajax("get", "http://36058s3d36.zicp.vip:55374/comment/good?cid=" + this.commentList[index].cid, null, true, function(x) {
+                    if (x.responseText == 1) {
+                        outThis.commentList[index].goodNum++
+                    }
+                })
+            },
+            dislikeComment: function(index) {
+                var outThis = this
+                ajax("get", "http://36058s3d36.zicp.vip:55374/comment/bad?cid=" + this.commentList[index].cid, null, true, function(x) {
+                    if (x.responseText == 1) {
+                        outThis.commentList[index].badNum++
+                    }
+                })
+            },
+            replyComment: function(index) {
+                isPicture == true
+                isVideo
+            },
+            getRepliedUid: function(index, divID) {
+                this.repliedUid = this.commentList[index].uid
+                show(divID)
+            },
+            submitNewComment: function(divID) {
+                var outThis = this
+                let formData = new FormData();
+                formData.append("uid", this.uid);
+                formData.append("isreid", this.repliedUid)
+                try {
+                    if (this.replyFile != null) {
+                        formData.append("picture", this.replyFile);
+                    } else {
+
+                    }
+                } catch (TypeError) {
+                    console.log("no pic ");
+                }
+                formData.append("content", this.replyContent);
+                ajax("post", "http://36058s3d36.zicp.vip:55374/comment/addComment?tid=" + this.tid, formData, true, function(x) {
+                    if (x.responseText == 1) {
+                        alert("reply successfully")
+                        outThis.replyContent = ""
+                        outThis.replyFile = null
+                        location.reload()
+                    } else {
+                        alert("reply failed")
+                    }
+                });
+                hide(divID)
+            },
+            uploadCommentFile: function(event) {
+                this.replyFile = event.target.files[0]
+            },
+            cancel: function(divID) {
+                hide(divID)
+            }
+        }
+    })
+</script>
+<script>
+    let CURR_UID = 1;
+    var jsonObj = parsePageUrl(location.href)
+    var uid = jsonObj.uid
+    var tid = jsonObj.tid
+
+    function publish() {
+        let pics = document.getElementById("upload_pics").files[0];
+        let text = document.getElementById("txtNew").value;
+        let curr_uid = CURR_UID;
+        let formData = new FormData();
+        formData.append("uid", uid);
+        formData.append("isreid", 0)
+        try {
+            if (pics != null) {
+                formData.append("picture", pics);
+            } else {
+
+            }
+        } catch (TypeError) {
+            console.log("no pic ");
+        }
+        formData.append("content", text);
+        ajax("post", "http://36058s3d36.zicp.vip:55374/comment/addComment?tid=" + tid, formData, true, function(x) {
+            if (x.responseText == 1) {
+                alert("publish successfully")
+                location.reload()
+            } else {
+                alert("publish failed")
+            }
+        });
+    }
+    window.onload = function() {
+        ajax("get", "http://36058s3d36.zicp.vip:55374/comment/getAllByTid?tid=" + tid, null, true, function(x) {
+
+            //todo
+        });
+    }
+</script>
+
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Message</title>
+    <link rel="stylesheet" type="text/css" href="http://36058s3d36.zicp.vip/SUSTechGamer-main/FrontEnd/src/css/message.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script rel="text/javascript" src="http://36058s3d36.zicp.vip/SUSTechGamer-main/FrontEnd/src/script/ServerInteraction.js"></script>
+</head>
+
+<body>
+    <div class="toggle" onclick="toggleMenu()"></div>
+    <script type="text/javascript">
+        function toggleMenu() {
+            let navigation = document.querySelector('.navigation');
+            let toggle = document.querySelector('.toggle');
+            navigation.classList.toggle('active');
+            toggle.classList.toggle('active');
+        }
+    </script>
+    <div id="vueDiv" v-cloak>
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a target="_blank" v-bind:href="'Store.html?uid='+hashedVisitorID">
+                        <span class="icon"><i class="fa fa-home" aria-hidden="true"></i></span>
+                        <span class="title">Store</span>
+                    </a>
+                </li>
+
+                <li v-if="!visitor">
+                    <a href="#" v-on:click.prevent="show('friendDiv')">
+                        <span class="icon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                        <span class="title">Friends</span>
+                    </a>
+                </li>
+
+
+                <li v-if="visitor">
+                    <a href="#" v-on:click.prevent="addFriend">
+                        <span class="icon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                        <span class="title">Add Friend</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+        <div style="width:1000px;height:25px;"></div>
+        <div id="hideDiv" style="position: fixed;width:100%;height:2000px;top:0;left:0;background-color:#000;opacity: 0.6;z-index: 6; display: none;"></div>
+        <a class="link" style="margin-left: 1250px;;" href="login.html">sign-in</a>
+        <a class="link" href="register.html" style="margin-left: 15px;">sign-up</a>
+        <div style="height:30px;"></div>
+        <a class="button" href="#" v-on:click.prevent="leaveMessage('leaveMessageDiv')" style="position: absolute;top:80px;width:200px;height:50px;line-height: 50px;left:110px;font-size: 20px;font-weight: bold;" v-if="visitor">leave message</a>
+        <div class="messageForDiv" v-for="(msg,index) in messageList">
+            <div class="avatarDiv" style="position: relative;">
+                <img v-bind:src="msg.avatarUrl" style="position: absolute;width:160px;height:120px;"></br>
+                <span style="top: 125px;display: inline-block;position: absolute;left:30px;">{{msg.userName}}</span> <span style="top: 143px;display: inline-block;position: absolute;left:30px;">{{msg.date}}</span>
+                <a target="_blank" class=" imgLink" v-bind:href="'userPage.html?uid='+hashedVisitorID+'&visited='+msg.hashedUid" style="position: absolute;display: block; width:100px;height:100px; "></a>
+            </div>
+            <textarea style="margin: 25px 100px;width:400px;height:110px;resize: none;" readonly>{{msg.content}}</textarea>
+        </div>
+        <div style="height:30px;"></div>
+        <div id="leaveMessageDiv" style="height:270px;width:400px;position:fixed;top:200px;left:550px;background-color:aqua;z-index: 7;display: none;border:1px solid white;">
+            <textarea style="width:360px;height:170px;margin:20px 20px;resize: none;" resizable="false" v-model="messageToLeave"></textarea>
+            <a class="button" href="#" style="width:85px;margin:10px 60px; font-weight: lighter;font-size: 17px;" v-on:click.prevent="submitMessage('leaveMessageDiv')">Submit</a>
+            <a class="button" href="#" style="width:85px;margin:10px 0px; font-weight: lighter;font-size: 17px;" v-on:click.prevent="cancel('leaveMessageDiv')">Cancle</a>
+        </div>
+        <div id="friendDiv" style="height:450px;width:600px;position:fixed;top:200px;left:450px;background-color:aqua;z-index: 7;display: none;border:1px solid white;">
+                <div style="width:600px;height:120px;border:1px solid grey;position: relative;" v-for="(friend,index) in friendList" v-if="(friendIndex<=index&index<friendIndex+3)?true:false">
+                    <div style="float: left;height:120px;width:120px;position: relative;margin-left: 20px;">
+                        <img style="position: absolute;width:100px;height:80px;top:10px;" v-bind:src="friend.avatarUrl">
+                        <a target="_blank" v-bind:href="'userPage.html?uid='+hashedUid+'&visited='+friend.hashedUid" style="position:absolute;top:95px;text-decoration: none;">{{friend.userName}}</a>
+                    </div>
+                    <textarea readonly style="float: left;width:250px;height:80px;color: rgb(70, 115, 121);margin-top: 10px;resize: none;">{{friend.profile}}</textarea>
+                    <a class="button" target="_blank" v-bind:href="'message.html?uid='+hashedUid+'&visited='+friend.hashedUid" style="width:150px; font-weight: lighter;font-size: 17px;display: inline-block;float: left;margin-top: 30px;margin-left: 10px;">Leave Message</a>
+                    <a class="button" href="#" style="width:150px; font-weight: lighter;font-size: 17px;display: inline-block;float: left;margin-top: 10px;margin-left: 10px;" v-on:click.prevent="deleteFriend(index)">Delete</a>
+                </div>
+                <a class="button" href="#" style="width:85px;top:370px;left:360px; font-weight: lighter;font-size: 17px;position: absolute;" v-on:click.prevent="prevFriend">&lt</a>
+                <a class="button" href="#" style="width:85px;top:370px;left:460px; font-weight: lighter;font-size: 17px;position: absolute;" v-on:click.prevent="nextFriend">&gt</a>
+                <a class="button" href="#" style="width:85px;top:370px;left:60px;  font-weight: lighter;font-size: 17px;position: absolute;" v-on:click.prevent="submit">Submit</a>
+                <a class="button" href="#" style="width:85px;top:370px;left:150px;  font-weight: lighter;font-size: 17px;position: absolute;" v-on:click.prevent="cancel('friendDiv')">Cancel</a>
+        </div>
+
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: "#vueDiv ",
+        data: {
+            messageList: [],
+            friendList:[],
+            friendIndex:0,
+            visitorID: "",
+            hashedVisitorID:"",
+            visitor: false,
+            uid: "",
+            hashedUid:"",
+            messageToLeave: "",
+            userName:"",
+        },
+        created: function() {
+            
+            var jsonObj = parsePageUrl(location.href)
+            this.hashedUid = jsonObj.visited
+            this.hashedVisitorID = jsonObj.uid
+            if (jsonObj.uid != jsonObj.visited) {
+                this.visitor = true
+            } else {
+                this.visitor = false
+            }
+            outThis = this
+            ajax("get","http://36058s3d36.zicp.vip:55374/userhash/findUidByHash?hash="+this.hashedUid,null,false,function(x){
+                outThis.uid=x.responseText
+            })
+            ajax("get","http://36058s3d36.zicp.vip:55374/userhash/findUidByHash?hash="+this.hashedVisitorID,null,false,function(x){
+                outThis.visitorID=x.responseText
+            })
+            ajax("get", "http://36058s3d36.zicp.vip:55374/chat/getChat?uid="+this.uid, null, true, function(xmlHttp) {
+                console.log(xmlHttp.responseText)
+                var jsonObj = JSON.parse(xmlHttp.responseText)
+                for (var msg in jsonObj) {
+                    var msgObj={}
+                    msgObj.uid=jsonObj[msg].sender
+                    ajax("get","http://36058s3d36.zicp.vip:55374/userhash/findHashByUid?uid="+msgObj.uid,null,false,function(x){
+                        msgObj.hashedUid=x.responseText
+                    })
+                    msgObj.avatarUrl="http://36058s3d36.zicp.vip/static/user/" + msgObj.uid + "/photo.jpg"
+                    msgObj.userName=jsonObj[msg].name
+                    msgObj.content=jsonObj[msg].content
+                    msgObj.date=jsonObj[msg].date
+                    outThis.messageList.push(msgObj)
+                }
+                console.log(outThis.messageList)
+            })
+            ajax("get", "http://36058s3d36.zicp.vip:55374/friend/getFriends?user1=" + this.uid, null, true, function(x) {
+                console.log(x.responseText)
+                var jsonObj = JSON.parse(x.responseText)
+                for (var o in jsonObj) {
+                    var friendObj = {}
+                    friendObj.uid = jsonObj[o].uid
+                    ajax("get","http://36058s3d36.zicp.vip:55374/userhash/findHashByUid?uid="+friendObj.uid,null,false,function(x){
+                        friendObj.hashedUid=x.responseText
+                    })
+                    friendObj.userName = jsonObj[o].name
+                    friendObj.profile = jsonObj[o].description
+                    friendObj.avatarUrl = "http://36058s3d36.zicp.vip/static/user/" + jsonObj[o].uid + "/photo.jpg"
+                    outThis.friendList.push(friendObj)
+                }
+            })
+        },
+        methods: {
+            leaveMessage: function(divID) {
+                show(divID)
+            },
+            cancel: function(divID) {
+                hide(divID)
+            },
+            show: function(divID) {
+                show(divID)
+            },
+            submitMessage: function(divID) {
+                outThis = this
+                console.log(outThis.messageToLeave)
+                var formData=new FormData()
+                formData.append("sender",this.visitorID)
+                formData.append("recv",this.uid)
+                formData.append("content",this.messageToLeave)
+                ajax("post", "http://36058s3d36.zicp.vip:55374/chat/addChat",formData, false, function(x) {
+                    if(x.responseText==1){
+                        alert("success")
+                        location.reload()
+                    }else{
+                        alert("failed")
+                    }
+                })
+                outThis.cancle(divID)
+                this.messageToLeave = ""
+            },
+            addFriend: function() {
+                ajax("get", "http://36058s3d36.zicp.vip:55374/friend/addFriend?user1=" + this.uid + "&user2=" + this.visitorID, null, true, function(x) {
+                    if (x.responseText == 1) {
+                        alert("add successfully")
+                    } else {
+                        alert("add failed")
+                    }
+                })
+            },
+            nextFriend:function(){
+                this.friendIndex+=3
+            },
+            prevFriend:function(){
+                this.friendIndex-=3
+            }
+
+        }
+    })
+</script>
+
+</html>

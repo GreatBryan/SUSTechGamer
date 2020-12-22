@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SUStech Gamer</title>
+    <link rel="stylesheet" type="text/css" href="http://36058s3d36.zicp.vip/SUSTechGamer-main/FrontEnd/src/css/Store.css" />
+    <script type="text/javascript" src="http://36058s3d36.zicp.vip/SUSTechGamer-main/FrontEnd/src/script/jquery-3.4.1.min.js"></script>
+    <script src="http://36058s3d36.zicp.vip/SUSTechGamer-main/FrontEnd/src/script/ServerInteraction.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="http://36058s3d36.zicp.vip/SUSTechGamer-main/FrontEnd/src/script/Store.js"></script>
+
+    <link rel="stylesheet" href="http://36058s3d36.zicp.vip/SUSTechGamer-main/FrontEnd/src/css/Community.css" />
+    <script src="http://36058s3d36.zicp.vip/SUSTechGamer-main/FrontEnd/src/script/bootstrap.min.js"></script>
+</head>
+
+<body id="body">
+    <div id="loading"></div>
+    <div id="all">
+        <style type="text/css">
+            #loading {
+                z-index: 500;
+                padding: 9000px 9000px 10000px 10000px;
+                background: url(../../figures/icon/logo.gif) no-repeat 10px top;
+                /*background:url(../../figures/background/cyberpunk2077.gif) repeat 10px top;*/
+                left: -110px;
+                top: -150px;
+                width: 90px;
+                position: fixed;
+                height: 21px
+            }
+        </style>
+        <script type="text/javascript">
+            let UID = null;
+            let HASHED_UID = null;
+            let q=null;
+            window.onload = function() {
+                setTimeout("$(\"#loading\").fadeOut(100);", 1600);
+                try {
+                    q = parsePageUrl(window.location.href);
+                    if (q.hasOwnProperty("uid")){
+                        ajax("get","http://36058s3d36.zicp.vip:55374/userhash/findUidByHash?hash="+q.uid,null,false,function(x){
+                            console.log(q.uid)
+                            UID = x.responseText;
+                            console.log(UID)
+                        })
+                        
+                        
+                    }
+                } catch (Exception) {
+                    console.log(Exception)
+                }
+                if (UID !== null) {
+                    // ajax("get","http://36058s3d36.zicp.vip:55374/userhash/findHashByUid?uid="+community[RECOMMEND_TID]["uid"].toString(),null,false,function(x){
+                    //     HASHED_UID = x.responseText;
+                    // })
+                    let buttons = document.getElementsByClassName("top_bar_btn");
+                    for (let i = 0; i < buttons.length; i++) {
+                        // buttons[i].href = buttons[i].href + "?uid=" + HASHED_UID.toString();
+                        buttons[i].href = buttons[i].href + "?uid=" + q.uid;
+                    }
+                    add_user_info();
+                }
+                get_community_recommend();
+                get_swiper();
+            }
+
+            function add_user_info() {
+                console.log("uid: "+UID)
+                let login_btn = document.getElementById("login_btn");
+                login_btn.remove();
+                let user_info = document.createElement("div");
+                user_info.id = "user_info";
+                let user_avatar = document.createElement("img");
+                user_avatar.id = "user_avatar";
+                let user_name = document.createElement("b");
+                user_name.id = "user_name";
+                user_avatar.src = "http://36058s3d36.zicp.vip/static/user/" + UID.toString() + "/photo.jpg";
+                ajax("get", "http://36058s3d36.zicp.vip:55374/user/findNameByUid?uid=" + UID.toString(), null, true, function(ua) {
+                    user_name.innerHTML = ua.responseText;
+                });
+                user_info.appendChild(user_name);
+                user_info.appendChild(user_avatar);
+                user_info.addEventListener("click", function() {
+                    // window.location.href = "userPage.html?uid=" + UID.toString() + "&visited=" + UID.toString();
+                    var a = document.createElement('a');
+                    var url = "userPage.html?uid=" + q.uid + "&visited=" + q.uid;
+                    a.target = "_blank"
+                    a.href = url;
+                    a.click();
+                });
+                let tb = document.getElementById("top_bar");
+                tb.appendChild(user_info);
+            }
+        </script>
+        <div id="head_gif"></div>
+        <div id="top_bar">
+            <ul id="top_bar_item">
+                <span id="top_bar_logo">SUStech Gamer</span>
+                <!-- <a class="top_bar_btn" href="Store.html">Store</a> -->
+                <!-- <a class="top_bar_btn" href="Community.html">Community</a> -->
+
+                <label style="margin-left: 150px;"><input style="height:50px;width:150px;border-radius:5px;" type="text" id="search_content"></label>
+                <img src="../../figures/icon/search_white_16.png" onclick=search()>
+                <a id="login_btn" href="login.html">Login</a>
+            </ul>
+        </div>
+
+        <div id="all_but_top_bar">
+            <div id="game_recommend">
+                <div class="carousel">
+                    <div class="carousel_img">
+                        <ul>
+                            <li v-on:click="click_event(1)" >
+                                <img  class="swiper_img" src="" />
+                                <div class="mask"></div>
+                            </li>
+                            <li v-on:click="click_event(2)" >
+                                <img class="swiper_img" src="" />
+                                <div class="mask"></div>
+                            </li>
+                            <li v-on:click="click_event(3)">
+                                <img class="swiper_img" src="" />
+                                <div class="mask"></div>
+                            </li>
+                            <li v-on:click="click_event(4)" >
+                                <img class="swiper_img" src="" />
+                                <div class="mask"></div>
+                            </li>
+                            <li v-on:click="click_event(5)" >
+                                <img class="swiper_img"  src="" />
+                                <div class="mask"></div>
+                            </li>
+                            <li v-on:click="click_event(6)">
+                                <img class="swiper_img" src="" />
+                                <div class="mask"></div>
+                            </li>
+                            <li v-on:click="click_event(7)">
+                                <img class="swiper_img" src="" />
+                                <div class="mask"></div>
+                            </li>
+                            <li v-on:click="click_event(8)" >
+                                <img class="swiper_img" src="" />
+                                <div class="mask"></div>
+                            </li>
+                            <li v-on:click="click_event(9)">
+                                <img class="swiper_img" src="" />
+                                <div class="mask"></div>
+                            </li>
+                            <li v-on:click="click_event(10)">
+                                <img class="swiper_img" src="" />
+                                <div class="mask"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="carousel_btn">
+                        <a href="javascript:;" class="right_btn"></a>
+                        <a href="javascript:;" class="left_btn"></a>
+                    </div>
+                    <div class="circles">
+                        <ol>
+                            <li class="cur"></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div id="community_recommend">
+                <div id="community_recommend_avatar">
+                    <img src="" id="avatar" alt="">
+                    <b id="username"></b>
+                </div>
+                <div id="community_recommend_picture">
+                    <img src="" id="community_picture" alt="">
+                </div>
+                <div id="scoreDiv">
+                    <h1 id="score">5</h1>
+                    <h3>/5</h3>
+                </div>
+
+                <div id="community_recommend_text">
+                    <b class="text_content" id="game_info"></b>
+                    <br/>
+                    <p class="text_content" id="content"></p>
+                    <a id="more_link"><b>more</b></a>
+                    <div id="like_dislike" class="text_content">
+                        <img id="like" src="../../figures/icon/like.png" onclick=community_like()>
+                        <img id="dislike" src="../../figures/icon/dislike.png" onclick=community_dislike()>
+                    </div>
+                </div>
+            </div>
+
+            <div id="game_list"></div>
+        </div>
+    </div>
+</body>
+<script>
+    let vue = new Vue({
+        el: "#game_recommend",
+        methods: {
+            click_event:  function(i){
+                let gids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+                if (!parsePageUrl(window.location.href).hasOwnProperty("uid")) {
+                    var a = document.createElement('a');
+                    var url = "./login.html";
+                    a.href = url;
+                    a.click();
+                    console.log("./gamePage.html?gid=" + gids[i].toString())
+                }else {
+                    var a = document.createElement('a');
+                    var url = "./gamePage.html?uid="+HASHED_UID+"&gid=" + gids[i].toString() + "&uid=" + HASHED_UID;
+                    a.href = url;
+                    a.target = "_blank";
+                    a.click();
+                    console.log("./gamePage.html?gid=" + gids[i].toString())
+                }
+            }
+        }
+    });
+</script>
+</html>

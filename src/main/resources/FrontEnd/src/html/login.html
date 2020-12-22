@@ -1,0 +1,92 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title> LOGIN</title>
+    <link rel="stylesheet" type="text/css" href="http://36058s3d36.zicp.vip/SUSTechGamer-main/FrontEnd/src/css/login.css" />
+    <script type="text/javascript" src="http://36058s3d36.zicp.vip/SUSTechGamer-main/FrontEnd/src/script/ServerInteraction.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="font-awesome.css"/> -->
+    <div id="gamer">
+        <h1 align="center"> </h1>
+        <h1 align="center"> Sustech Gamer</h1>
+    </div>
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.1/css/all.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="login_box">
+
+        <!-- <h1> LOGIN</h1> -->
+        <div id="switch">
+            <a href="login.html">Login/</a>
+            <a href="register.html">Register</a>
+            <!-- <a class="linkABlue" id="toAccountLogin" href="login.html">账号登录/</a>  -->
+            <!-- <span class="register-line"></span>  -->
+            <!-- <a class="linkAGray" id="toVCodeLogin" href="register.html">账号注册</a>  -->
+        </div>
+        <br>
+        <div id="form">
+            <!-- 
+			<div id="errorMsg" class="tip-box visiblility-hidden"> 
+		  <i class="err-ico"></i> 
+		  <span class="tip-font" id="tipMsg">请填写完整的登录信息</span> 
+		  <span id="closeErrorMsg" class="close-ico"></span> 
+		 </div>  -->
+            <!-- <template v-if='active === "login"'> -->
+            <div class="search-box-wrap">
+                <div class="search-box">
+                    <input placeholder="Username" name="Username" type="text" class="search-input">
+                    <a href="#" class="search-btn">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- </template> -->
+            <br>
+            <div class="search-box-wrap">
+                <div class="search-box">
+                    <input placeholder="Password" name="Password" type="password" class="search-input">
+                    <a href="#" class="search-btn">
+                        <i class="fa fa-key" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- <div id="input_box">
+				<input type="text" name="Username" placeholder="Username" autocomplete="off" onfocus="closeErrorMsg()">
+			</div>
+			<div id="input_box">
+				<input type="text" name="Password" placeholder="Password" autocomplete="off" onfocus="closeErrorMsg()">
+			</div> -->
+            <br>
+            <div class="layui-form">记住密码
+                <input type="checkbox" name="remember" id="remember" lay-skin="primary" title="记住登录信息" checked>
+            </div>
+            <br>
+            <div class="btn" id="a" input type="button" onclick="login_ajax()">sign in
+                <!-- <button id="a" input type="button" ">Sign in</button> -->
+            </div>
+
+            <div id="sign-in">
+                <a href="https://www.runoob.com">忘记密码?</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+<script>
+    document.onkeydown = function (event) {
+        var e = event || window.event;
+        if (e && e.keyCode == 13) { //回车键的键值为13
+            document.getElementById("a").click(); //调用登录按钮的登录事件
+        }
+    };
+</script>
+</html>
