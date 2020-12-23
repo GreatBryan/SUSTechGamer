@@ -26,9 +26,8 @@
 <body>
     <div id="vueDiv" v-cloak>
         <div id="headerDiv">
-            <a style="margin-left: 20px;" target="_blank" v-bind:href="'Store.html?uid='+hashedUid">Store| </a>
-            <a>first | </a>
-            <a>first | </a>
+            <a class="link" style="margin-left: 20px;" target="_blank" v-bind:href="'Store.html?uid='+hashedUid">Store </a>
+            
             <a style="margin-left: 1170px;">sign-in</a>
             <a>sign-up</a>
         </div>
@@ -135,7 +134,7 @@
                     <img src="../../figures/icon/dislike.png" style="width:30px;height:30px;position:absolute;">
                     <a v-on:click.prevent="purchaseGame" href="#" style="width:30px;height:30px;z-index: 3;position: absolute;opacity: 0;"></a>
                 </div> -->
-                <a v-on:click.prevent="purchaseGame" class="button" href="#" style="width:90px;height:30px;margin-top:100px;margin-left:20px;font-size: 15px;font-weight: bold;float: left;line-height: 30px;">see more</a>
+                <a target="_blank" class="button" v-bind:href="'Community.html?uid='+hashedUid+'&tid='+comment.tid" style="width:90px;height:30px;margin-top:100px;margin-left:20px;font-size: 15px;font-weight: bold;float: left;line-height: 30px;">see more</a>
             </div>
 
             <textarea style="width:920px;height:100px;margin-top: 20px;margin-left:10px;resize: none;float: left;" placeholder="leave your comment and picture here (need purchase first)" v-model="userComment"></textarea>
