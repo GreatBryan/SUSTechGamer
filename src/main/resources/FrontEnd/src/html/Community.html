@@ -402,15 +402,19 @@
             replyFile: null,
             repliedUid: "",
             uid: "",
+            hashedUid:"",
             tid: "",
             commentList: [],
         },
         created: function() {
             var outThis = this
             var jsonObj = parsePageUrl(location.href)
-            this.uid = jsonObj.uid
+            this.hashedUid = jsonObj.uid
             this.tid = jsonObj.tid
-            console.log(this.tid)
+            ajax("get","http://36058s3d36.zicp.vip:55374/userhash/findUidByHash?hash="+this.hashedUid,null,false,function(x){
+                outThis.uid=x.responseText
+            })
+
             ajax("get", "http://36058s3d36.zicp.vip:55374/comment/getAllByTid?tid=" + this.tid, null, true, function(x) {
                 console.log(x.responseText)
                 var jsonObj = JSON.parse(x.responseText)

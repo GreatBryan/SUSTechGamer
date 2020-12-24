@@ -18,8 +18,7 @@ function search() {
 		if (!cur_info.hasOwnProperty("uid")) {
 			window.location.href = "./Search.html" + "?query=" + query;
 		} else {
-			let uid = parsePageUrl(window.location.href).uid;
-			window.location.href = "./Search.html?uid=" + uid + "&query=" + query;
+			window.location.href = "./Search.html?uid=" + HASHED_UID + "&query=" + query;
 		}
 	}
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>SUStech Gamer</title>
-    <script src="../script/ServerInteraction.js"></script>
+    <script src="http://36058s3d36.zicp.vip/FrontEnd/src/script/ServerInteraction.js"></script>
     <link rel="stylesheet" href="http://36058s3d36.zicp.vip/FrontEnd/src/css/Search.css"/>
 </head>
 
@@ -16,7 +16,7 @@
         <a class="top_bar_btn" href="About.html">About</a>
 
         <label><input type="text" id="search_content"></label>
-        <img src="../../figures/icon/search_white_16.png" onclick=search()>
+        <img src="http://36058s3d36.zicp.vip/FrontEnd/figures/icon/search_white_16.png" onclick=search()>
         <a id="login_btn" href="login.html">Login</a>
     </ul>
 </div>
@@ -113,6 +113,17 @@
                 });
             }
             GAME_LIST_COUNT += game_list.length;
+        }
+        function search() {
+            let cur_info = parsePageUrl(window.location.href);
+            let query = document.getElementById("search_content").value;
+            if (query !== "") {
+                if (!cur_info.hasOwnProperty("uid")) {
+                    window.location.href = "./Search.html" + "?query=" + query;
+                } else {
+                    window.location.href = "./Search.html?uid=" + HASHED_UID + "&query=" + query;
+                }
+            }
         }
     </script>
 </body>

@@ -78,6 +78,25 @@ public class PostbarController {
 
     @CrossOrigin
     @ResponseBody
+    @RequestMapping("/getAllbyTid")
+    public JSONObject getAllbyTid(@RequestParam("tid") int tid){
+        JSONObject json = new JSONObject();
+        postbar po = postbarRepository.findByTid(tid).get(0);
+        json.put("content", po.getContent());
+        json.put("uid", po.getUid());
+        json.put("name", userDao.findUserByUid(po.getUid())
+                .get(0).getName());
+        json.put("create_time", po.getCreate_time());
+        json.put("points", po.getPoints());
+        json.put("good", po.getZan());
+        json.put("bad", po.getCai());
+        json.put("path", po.getPicture() == null ? "" : po.getPicture());
+        json.put("isvideo",po.getIsvideo());
+        return json;
+    }
+
+    @CrossOrigin
+    @ResponseBody
     @RequestMapping("/getAllByGid")
     public JSONArray getAllByGid(@RequestParam("gid") int gid){
         List<postbar> g_p = postbarRepository.findByGid(gid);

@@ -21,7 +21,7 @@
             #loading {
                     z-index: 500;
                 padding: 9000px 9000px 10000px 10000px;
-                background: url(../../figures/icon/logo.gif) no-repeat 10px top;
+                background: url(http://36058s3d36.zicp.vip/FrontEnd/figures/icon/logo.gif) no-repeat 10px top;
                 /*background:url(../../figures/background/cyberpunk2077.gif) repeat 10px top;*/
                 left: -110px;
                 top: -150px;
@@ -39,26 +39,22 @@
                 try {
                     q = parsePageUrl(window.location.href);
                     if (q.hasOwnProperty("uid")){
+                        HASHED_UID = q.uid;
                         ajax("get","http://36058s3d36.zicp.vip:55374/userhash/findUidByHash?hash="+q.uid,null,false,function(x){
                             console.log(q.uid)
                             UID = x.responseText;
                             console.log(UID)
                         })
-                        
-                        
                     }
                 } catch (Exception) {
 
                     console.log(Exception)
                 }
                 if (UID !== null) {
-                    // ajax("get","http://36058s3d36.zicp.vip:55374/userhash/findHashByUid?uid="+community[RECOMMEND_TID]["uid"].toString(),null,false,function(x){
-                    //     HASHED_UID = x.responseText;
-                    // })
                     let buttons = document.getElementsByClassName("top_bar_btn");
                     for (let i = 0; i < buttons.length; i++) {
                         // buttons[i].href = buttons[i].href + "?uid=" + HASHED_UID.toString();
-                        buttons[i].href = buttons[i].href + "?uid=" + q.uid;
+                        buttons[i].href = buttons[i].href + "?uid=" + HASHED_UID;
                     }
                     add_user_info();
                 }
@@ -102,7 +98,7 @@
                 <!-- <a class="top_bar_btn" href="Community.html">Community</a> -->
 
                 <label style="margin-left: 150px;"><input style="height:50px;width:150px;border-radius:5px;" type="text" id="search_content"></label>
-                <img src="../../figures/icon/search_white_16.png" onclick=search()>
+                <img src="http://36058s3d36.zicp.vip/FrontEnd/figures/icon/search_white_16.png" onclick=search()>
                 <a id="login_btn" href="login.html">Login</a>
             </ul>
         </div>
@@ -194,8 +190,8 @@
                     <p class="text_content" id="content"></p>
                     <a id="more_link"><b>more</b></a>
                     <div id="like_dislike" class="text_content">
-                        <img id="like" src="../../figures/icon/like.png" onclick=community_like()>
-                        <img id="dislike" src="../../figures/icon/dislike.png" onclick=community_dislike()>
+                        <img id="like" src="http://36058s3d36.zicp.vip/FrontEnd/figures/icon/like.png" onclick=community_like()>
+                        <img id="dislike" src="http://36058s3d36.zicp.vip/FrontEnd/figures/icon/dislike.png" onclick=community_dislike()>
                     </div>
                 </div>
             </div>
