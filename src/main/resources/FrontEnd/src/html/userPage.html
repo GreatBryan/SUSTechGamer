@@ -329,7 +329,7 @@
             } else {
                 this.administrator = false
             }
-            this.avatarUrl = "http://36058s3d36.zicp.vip/static/user/" + this.uid + "/photo.jpg"
+            this.avatarUrl = "http://36058s3d36.zicp.vip/static/user/" + this.uid + "/photo.jpg"+"?num="+Math.random()
             ajax("get", "http://36058s3d36.zicp.vip:55374/game_dlc_path/getDlcByUid?uid=" + this.uid, null, true, function(x) {
 
                 var jsonObj = JSON.parse(x.responseText)
