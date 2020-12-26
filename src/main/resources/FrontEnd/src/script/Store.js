@@ -112,7 +112,7 @@ window.onscroll = function() {
 
     if(getScrollTop() + getWindowHeight() === getScrollHeight()) {
 		if (GAME_LIST_COUNT === 0) {
-			ajax("get", "http://10.21.100.129:9090/game/getAllGame", null, true, function (game_list) {
+			ajax("get", "http://36058s3d36.zicp.vip:55374/game/getAllGame", null, true, function (game_list) {
 				console.log("entering return");
 				let result = JSON.parse(game_list.responseText);
 				console.log(result);
@@ -245,30 +245,30 @@ let LIKE_CLICKED = false;
 let DISLIKE_CLICKED = false;
 function community_like(){
 	if (!LIKE_CLICKED && !DISLIKE_CLICKED){
-		ajax("get", "http://10.21.100.129:9090/comment/like?cid=7", null, true, function (){});
+		ajax("get", "http://36058s3d36.zicp.vip:55374/comment/like?cid=7", null, true, function (){});
     	let like = document.getElementById("like");
-    	like.src = "../../figures/icon/liked.png";
+    	like.src = "http://36058s3d36.zicp.vip/FrontEnd/figures/icon/liked.png";
     	console.log("like");
     	LIKE_CLICKED = true;
 	}else if (LIKE_CLICKED && !DISLIKE_CLICKED){
-		ajax("get", "http://10.21.100.129:9090/comment/likeWithdraw?cid=7", null, true, function (){});
+		ajax("get", "http://36058s3d36.zicp.vip:55374/comment/likeWithdraw?cid=7", null, true, function (){});
 		let like = document.getElementById("like");
-		like.src = "../../figures/icon/like.png";
+		like.src = "http://36058s3d36.zicp.vip/FrontEnd/figures/icon/like.png";
 		console.log("like withdraw");
 		LIKE_CLICKED = false;
 	}
 }
 function community_dislike(){
 	if (!LIKE_CLICKED && !DISLIKE_CLICKED) {
-		ajax("get", "http://10.21.100.129:9090/comment/dislike?cid=7", null, true, function () {});
+		ajax("get", "http://36058s3d36.zicp.vip:55374/comment/dislike?cid=7", null, true, function () {});
 		let dislike = document.getElementById("dislike");
-		dislike.src = "../../figures/icon/disliked.png";
+		dislike.src = "http://36058s3d36.zicp.vip/FrontEnd/figures/icon/disliked.png";
 		console.log("dislike");
 		DISLIKE_CLICKED = true;
 	}else if (!LIKE_CLICKED && DISLIKE_CLICKED){
-		ajax("get", "http://10.21.100.129:9090/comment/dislikeWithdraw?cid=7", null, true, function (){});
+		ajax("get", "http://36058s3d36.zicp.vip:55374/comment/dislikeWithdraw?cid=7", null, true, function (){});
 		let dislike = document.getElementById("dislike");
-		dislike.src = "../../figures/icon/dislike.png";
+		dislike.src = "http://36058s3d36.zicp.vip/FrontEnd/figures/icon/dislike.png";
 		console.log("dislike withdraw");
 		DISLIKE_CLICKED = false;
 	}
@@ -288,7 +288,7 @@ function get_community_recommend(){
 		score.innerHTML = "<b>"+community[RECOMMEND_TID]["points"]+"</b>"
 		let user_name = document.getElementById("username");
 		let avatar = document.getElementById("avatar");
-		ajax("get", "http://10.21.100.129:9090/user/findNameByUid?uid="+community[RECOMMEND_TID]["uid"].toString(), null, true, function(ua){
+		ajax("get", "http://36058s3d36.zicp.vip:55374/user/findNameByUid?uid="+community[RECOMMEND_TID]["uid"].toString(), null, true, function(ua){
 			user_name.innerHTML = ua.responseText;
 		});
 		avatar.src = "http://36058s3d36.zicp.vip/static/user/"+community[RECOMMEND_TID]["uid"].toString()+"/photo.jpg";
@@ -296,7 +296,7 @@ function get_community_recommend(){
 		let community_picture = document.getElementById("community_picture");
 		let game_info = document.getElementById("game_info");
 		let content = document.getElementById("content");
-		community_picture.src = community[RECOMMEND_TID]["picture"];
+		community_picture.src = community[RECOMMEND_TID]["path"];
 		content.innerHTML = community[RECOMMEND_TID]["content"];
 		ajax("get", "http://36058s3d36.zicp.vip:55374/game/getAllBygid?gid="+community[RECOMMEND_TID]["gid"].toString(), null, true, function(gn){
 			gn = JSON.parse(gn.responseText);
@@ -305,7 +305,7 @@ function get_community_recommend(){
 
 		let more_link = document.getElementById("more_link");
 		more_link.addEventListener("click", function (){
-			more_link.href = UID !== null ? "gamePage.html?gid="+community[RECOMMEND_TID]["gid"].toString()+"&uid="+UID : "gamePage.html?gid="+community[RECOMMEND_TID]["gid"].toString();
+			more_link.href = UID !== null ? "gamePage.html?gid="+community[RECOMMEND_TID]["gid"].toString()+"&uid="+HASHED_UID : "gamePage.html?gid="+community[RECOMMEND_TID]["gid"].toString();
 		});
 	});
 }

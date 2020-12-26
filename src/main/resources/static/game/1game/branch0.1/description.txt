@@ -1,12 +1,1 @@
-ipconfig /release (DHCP服务器分配的地址发生冲突)释放DHCP IP地址
-抓包（udp.prot == 67 68过滤）
-ipconfig /renew 重新分配IP地址
-
-ping 121.111.111.111
-配置DHCP server 连接
-
-
-
-1.了解DHCP会话，报文
-2.
-
+However, the campus is full of bullying phenomenon, and Max can't answer the question because of his selfie in class Mr.Jefferson I was ridiculed by my classmate Victoria.

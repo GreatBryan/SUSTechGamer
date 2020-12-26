@@ -1,5 +1,0 @@
-adjacent=[  [5,0.5],  [6,0.4]  ]
-
-
-for Node in adjacent:
-	print(Node[1])

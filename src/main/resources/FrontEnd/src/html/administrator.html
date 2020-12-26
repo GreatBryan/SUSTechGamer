@@ -77,7 +77,7 @@
                 </div>
                 <div class="userButtonDiv">
                     <textarea v-model="user.profile" style="float:left;width:350px;height:100px;resize: none;margin-left: 20px;position: absolute;"></textarea>
-                    <a class="button" href="#" style="width:85px; font-weight: lighter;font-size: 17px;position: absolute;top:120px;left:20px;">Submit</a>
+                    <a v-on:click="submitModifyUserInfo(userIndex)" class="button" href="#" style="width:85px; font-weight: lighter;font-size: 17px;position: absolute;top:120px;left:20px;">Submit</a>
                     <a class="button" href="#" style="width:125px; font-weight: lighter;font-size: 17px;position: absolute;top:120px;left:130px;">Ban Comment</a>
                 </div>
             </div>
@@ -211,6 +211,32 @@
                         outThis.searchedGameList.splice(index, 1)
                     } else {
                         alert("delete failed")
+                    }
+                })
+            },
+            submitModifyUserInfo:function(index){
+                var formData = new FormData()
+                formData.append("name", this.searchedUserList[index].userName)
+                if (this.searchedUserList[index].gender == "Man") {
+                    formData.append("sex", 'M')
+                } else {
+                    formData.append("sex", 'W')
+                }
+                if (this.searchedUserList[index].role == "Developer") {
+                    formData.append("role", 2)
+                } else {
+                    formData.append("role", 1)
+                }
+
+                formData.append("uid", this.searchedUserList[index].uid)
+                formData.append("birth", this.searchedUserList[index].birthday)
+                formData.append("description", this.searchedUserList[index].profile)
+                ajax("post", "http://36058s3d36.zicp.vip:55374/user/changeInfo", formData, false, function(x) {
+
+                    if (x.responseText == 1) {
+                        alert("submit successfullt")
+                    } else {
+                        alert("submit failed")
                     }
                 })
             }

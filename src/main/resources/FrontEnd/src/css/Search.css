@@ -1,11 +1,11 @@
 /* body */
 body{
-    background: #ff9191;
+    background: whitesmoke;
 }
 *{
     margin: 0;
     padding: 0;
-    background-color: #ff9191;
+    background-color: whitesmoke;
 }
 
 /* top bar*/

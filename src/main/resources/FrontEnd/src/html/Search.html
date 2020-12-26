@@ -5,15 +5,14 @@
     <title>SUStech Gamer</title>
     <script src="http://36058s3d36.zicp.vip/FrontEnd/src/script/ServerInteraction.js"></script>
     <link rel="stylesheet" href="http://36058s3d36.zicp.vip/FrontEnd/src/css/Search.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
 <body>
 <div id="top_bar">
     <ul id="top_bar_item">
         <a class="top_bar_btn" href="Store.html">Store</a>
-        <a class="top_bar_btn" href="userPage.html">Library</a>
-        <a class="top_bar_btn" href="Community.html">Community</a>
-        <a class="top_bar_btn" href="About.html">About</a>
+
 
         <label><input type="text" id="search_content"></label>
         <img src="http://36058s3d36.zicp.vip/FrontEnd/figures/icon/search_white_16.png" onclick=search()>
@@ -28,8 +27,12 @@
             run_search();
             try{
                 let q = parsePageUrl(window.location.href);
-                if (q.hasOwnProperty("uid"))
+                if (q.hasOwnProperty("uid")) {
                     UID = q.uid;
+                    ajax("get","http://36058s3d36.zicp.vip:55374/userhash/findUidByHash?hash="+q.uid,null,false,function(x){
+                        UID = x.responseText;
+                    })
+                }
             }catch (Exception){
                 console.log(Exception)
             }
@@ -80,7 +83,7 @@
             let gid = [];
             for (let i = GAME_LIST_COUNT; i < GAME_LIST_COUNT+5 && i < list.length; i++){
                 game_list.push(list[i]["name"]);
-                game_pics.push("http://36058s3d36.zicp.vip/static/game/"+list[i]["gid"].toString()+"game/picture/game.jpg");
+                game_pics.push("http://36058s3d36.zicp.vip/static/game/"+list[i]["gid"].toString()+"game/shoot/1shoot.jpg");
                 game_descriptions.push(list[i]["g_des"]);
                 gid.push(list[i]["gid"]);
             }
@@ -127,4 +130,21 @@
         }
     </script>
 </body>
+<script>
+    var vm=new Vue({
+        el:"#top_bar",
+        data:{
+            hashedUid:"",
+            uid:"",
+        },
+        created:function(){
+            var outThis=this
+            var jsonObj = parsePageUrl(location.href)
+            this.hashedUid = jsonObj.uid
+            ajax("get","http://36058s3d36.zicp.vip:55374/userhash/findUidByHash?hash="+this.hashedUid,null,false,function(x){
+                outThis.uid=x.responseText
+            })
+        }
+    })
+</script>
 </html>

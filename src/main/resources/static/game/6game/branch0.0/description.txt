@@ -1,1 +1,1 @@
-this is the first version of the game
+A city operation simulation game developed by colossal order Ltd. and released by Paradox Interactive. The game introduces new game playing elements, which makes players experience the excitement and hardship of creating and maintaining a real city, and expands some themes in urban construction experience.

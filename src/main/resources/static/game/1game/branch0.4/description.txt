@@ -1,5 +1,1 @@
-adjacent=[  [5,0.5],  [6,0.4]  ]
-
-
-for Node in adjacent:
-	print(Node[1])
+His stepfather, David, was a veteran, so he was very strict with Chloe. Chloe and his constant friction, the two people look like enemies. Over the past five years, Chloe met her companion, Rachel amber,

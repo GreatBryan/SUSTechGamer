@@ -84,13 +84,19 @@ public class GameController{
     @RequestMapping("/findByName")
     public List<Game> findByName(@RequestParam String name){
         List<Game> get_game = gameRepository.findAll();
-        List<Game> re = new ArrayList<>();
+        List<Game> re_1 = new ArrayList<>();
         for(Game g : get_game){
             if(g.getName().contains(name)){
-                re.add(g);
+                re_1.add(g);
             }
         }
-        return re;
+        List<Label_Game> ge_lg = label_gameRepository.findAll();
+        for(Label_Game l : ge_lg){
+            if(l.getLabel().contains(name)){
+                re_1.add(gameRepository.findById(l.getId()).get(0));
+            }
+        }
+        return re_1;
     }
 
     @CrossOrigin

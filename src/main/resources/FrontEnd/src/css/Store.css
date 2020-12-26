@@ -1,10 +1,11 @@
 /* body */
 body{
-    background: #ff9191;
+    background: whitesmoke;
 }
 
 /* top bar*/
 #top_bar{
+
     height: 80px;
     width: 100%;
     text-align: center;
@@ -168,7 +169,7 @@ body{
 
 /* community_recommend */
 #community_recommend{
-    background-color: #a1f5a1;
+    background-color: lightcyan;
     width: 1200px;
     height: 500px;
     margin: 0 auto;
@@ -216,8 +217,8 @@ body{
     position: relative;
     top: 300px;
     left: 920px;
-    background-color: rgba(50, 200, 200, 50);
-    border: #626262 solid 1px;
+    background-color: white;
+    /*border: #626262 solid 1px;*/
 }
 #community_recommend_avatar *{
     background-color: rgba(0, 0, 0, 0);
@@ -289,11 +290,8 @@ body{
     left: 400px;
 }
 
-#all{
-    margin-top: 300px;
-}
 #all_but_top_bar{
-    margin-top: 130px;
+    margin-top: 30px;
 }
 #head_gif{
     height: 600px;

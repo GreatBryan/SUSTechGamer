@@ -171,7 +171,7 @@ public class AdministerController {
                             if (i == 0) {
                                 t1.put("description", url);
                             } else if (i == 1) {
-                                t1.put("description", url);
+                                t1.put("email", url);
                             } else if (i == 2) {
                                 t1.put("birth", url);
                             }

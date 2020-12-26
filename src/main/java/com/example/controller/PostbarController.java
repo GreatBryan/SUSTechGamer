@@ -65,7 +65,8 @@ public class PostbarController {
         JSONArray json = new JSONArray();
         for(postbar po : get_postbar){
             JSONObject jo = new JSONObject();
-            jo.put("tid", po.getGid());
+            jo.put("tid", po.getTid());
+            jo.put("uid",po.getUid());
             jo.put("name", userDao.findUserByUid(po.getUid()).get(0).getName());
             jo.put("user_picture", "http://36058s3d36.zicp.vip/static/user/" + po.getUid() + "/photo.jpg");
             jo.put("content", po.getContent());
